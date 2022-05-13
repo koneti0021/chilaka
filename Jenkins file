@@ -20,22 +20,21 @@ pipeline
           {
              steps
              {
-                sh 'scp sourece loation and destanation loccation'
-              }
+                sh 'scp /var/lib/jenkins/workspace/webapp/target/web.war username@2.3.5.5.6:/var/lib/tomcat8/webapps/qaenv.war'                  }
            }
            stage('ContTesting')
            {
               steps
               {
                  git 'testing repository url'
-                 sh 'java -jar testing.jar'
+                 sh 'java -jar /var/lib/jenkins/workspace/Declarative_pipeline/Testing.jar'
               }
            }
            post
            {
              success
              {
-                input message: 'wating for  approval from DM', Submitter: 'koneti'
+                input message: 'wating for  approval from DM', Submitter: 'Samul'
                sh 'scp /var/lib/jenkins/workspace/Declartive_Pipeline/webapp/target/webapp.war  username@9.0.8.7:/var/lib/tomcat/webapps/prodenv.war'
              }
              failure
